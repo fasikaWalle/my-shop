@@ -4,6 +4,7 @@ import {
   TOGGLE_CART,
   UPDATE_CART_QUANTITY,
   ADD_TO_CART,
+  REMOVE_FROM_CART,
 } from "../actions";
 // const addToCart = (data) => (dispatch) => {
 
@@ -46,4 +47,35 @@ const updateCartQuantity = (cart, _id, item) => (dispatch) => {
   }
 };
 
-export { toggleCart, addMultipleToCart, updateCartQuantity };
+const removeFromCart = (item) => (dispatch) => {
+  dispatch({
+    type: REMOVE_FROM_CART,
+    _id: item._id,
+  });
+  idbPromise("cart", "delete", { ...item });
+};
+
+const onChangeUpdateCartQuantity = (value, item) => (dispatch) => {
+  if (value === "0") {
+    dispatch({
+      type: REMOVE_FROM_CART,
+      _id: item._id,
+    });
+    idbPromise("cart", "delete", { ...item });
+  } else {
+    dispatch({
+      type: UPDATE_CART_QUANTITY,
+      _id: item._id,
+      purchaseQuantity: parseInt(value),
+    });
+    idbPromise("cart", "put", { ...item, purchaseQuantity: parseInt(value) });
+  }
+};
+
+export {
+  toggleCart,
+  addMultipleToCart,
+  updateCartQuantity,
+  removeFromCart,
+  onChangeUpdateCartQuantity,
+};

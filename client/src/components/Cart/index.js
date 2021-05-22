@@ -3,29 +3,25 @@ import CartItem from "../CartItem";
 import Auth from "../../utils/auth";
 import propTypes from "prop-types";
 import "./style.css";
-// import { useStoreContext } from "../../utils/GlobalState";
-// import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from "../../utils/actions";
-// import { idbPromise } from "../../utils/helpers";
+
 import { QUERY_CHECKOUT } from "../../utils/queries";
 import { loadStripe } from "@stripe/stripe-js";
 import { useLazyQuery } from "@apollo/react-hooks";
-// import { toggleCart } from "../../actions/cartAction";
+
 import * as cartAction from "../../actions/cartAction";
 import { connect } from "react-redux";
 const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
 
-const Cart = ({ cart, cartOpen, addMultipleToCart, toggleCart }) => {
-  // const [state, dispatch] = useStoreContext();
+const Cart = ({
+  cart,
+  cartOpen,
+  addMultipleToCart,
+  toggleCart,
+  removeFromCart,
+  onChangeUpdateCartQuantity,
+}) => {
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
   useEffect(() => {
-    // async function getCart() {
-    //   const cart = await idbPromise("cart", "get");
-    //   dispatch({ type: ADD_MULTIPLE_TO_CART, products: [...cart] });
-    // }
-
-    // if (!state.cart.length) {
-    //   getCart();
-    // }
     addMultipleToCart(cart);
   }, [cart.length, addMultipleToCart]);
 
@@ -76,7 +72,12 @@ const Cart = ({ cart, cartOpen, addMultipleToCart, toggleCart }) => {
       {cart.length ? (
         <div>
           {cart.map((item) => (
-            <CartItem key={item._id} item={item} />
+            <CartItem
+              key={item._id}
+              item={item}
+              removeFromCart={removeFromCart}
+              onChangeUpdateCartQuantity={onChangeUpdateCartQuantity}
+            />
           ))}
 
           <div className="flex-row space-between">
@@ -100,17 +101,19 @@ const Cart = ({ cart, cartOpen, addMultipleToCart, toggleCart }) => {
   );
 };
 propTypes.Cart = {
-  // addToCart: propTypes.func.isRequired,
   toggleCart: propTypes.func.isRequired,
   addMultipleToCart: propTypes.func.isRequired,
   cart: propTypes.object.isRequired,
   cartOpen: propTypes.bool.isRequired,
+  removeFromCart: propTypes.func.isRequired,
+  onChangeUpdateCartQuantity: propTypes.func.isRequired,
 };
 
 const mapActionToProps = {
-  // addToCart: cartAction.addToCart,
   toggleCart: cartAction.toggleCart,
   addMultipleToCart: cartAction.addMultipleToCart,
+  removeFromCart: cartAction.removeFromCart,
+  onChangeUpdateCartQuantity: cartAction.onChangeUpdateCartQuantity,
 };
 
 const mapStateToProps = (state) => ({
