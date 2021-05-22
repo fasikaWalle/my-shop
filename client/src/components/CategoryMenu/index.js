@@ -12,7 +12,7 @@ function CategoryMenu({ fetchCategories, categories, setCurrentCategory }) {
 
   useEffect(() => {
     fetchCategories(categoryData, loading);
-  }, [categoryData]);
+  }, [categoryData, fetchCategories, loading]);
 
   const clickHandler = (id) => {
     setCurrentCategory(id);
