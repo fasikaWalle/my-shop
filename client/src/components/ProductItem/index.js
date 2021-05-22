@@ -5,14 +5,12 @@ import propTypes from "prop-types";
 import { connect } from "react-redux";
 // import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";
 // import { idbPromise } from "../../utils/helpers";
-import * as cartAction from "../../actions/cartAction";
-function ProductItem(props) {
-  const { image, name, _id, price, quantity } = props.item;
+// import * as cartAction from "../../actions/cartAction";
+function ProductItem(item) {
+  const { image, name, _id, price, quantity, updateCartQuantity, cart } = item;
   // const [state, dispatch] = useStoreContext();
   const addToCart = () => {
-    console.log("what");
-    console.log(props.cart);
-    props.updateCartQuantity(props.cart, _id, props.item);
+    updateCartQuantity(cart, _id, item);
     // const itemInCart = state.cart.find((item) => item._id === _id);
     // if (itemInCart) {
     //   dispatch({
@@ -52,18 +50,4 @@ function ProductItem(props) {
   );
 }
 
-propTypes.ProductItem = {
-  cart: propTypes.array.isRequired,
-  updateCartQuantity: propTypes.func.isRequired,
-  item: propTypes.object.isRequired,
-};
-
-const mapActionToProps = {
-  updateCartQuantity: cartAction.updateCartQuantity,
-};
-
-const mapStateToProps = (state, item) => ({
-  cart: state.carts.cart,
-  item: item,
-});
-export default connect(mapStateToProps, mapActionToProps)(ProductItem);
+export default ProductItem;

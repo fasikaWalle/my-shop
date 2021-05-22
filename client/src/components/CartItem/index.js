@@ -28,35 +28,34 @@ const CartItem = ({ item }) => {
   //     idbPromise("cart", "put", { ...item, purchaseQuantity: parseInt(value) });
   //   }
   // };
-  // return (
-  //   <div className="flex-row">
-  //     <div>
-  //       <img src={`/images/${item.image}`} alt="" />
-  //     </div>
-  //     <div>
-  //       <div>
-  //         {item.name}, ${item.price}
-  //       </div>
-  //       <div>
-  //         <span>Qty:</span>
-  //         <input
-  //           type="number"
-  //           placeholder="1"
-  //           value={item.purchaseQuantity}
-  //           onChange={onChange}
-  //         />
-  //         <span
-  //           role="img"
-  //           aria-label="trash"
-  //           onClick={() => removeFromCart(item)}
-  //         >
-  //           🗑️
-  //         </span>
-  //       </div>
-  //     </div>
-  //   </div>
-  // );
-  console.log(item);
+  return (
+    <div className="flex-row">
+      <div>
+        <img src={`/images/${item.image}`} alt="" />
+      </div>
+      <div>
+        <div>
+          {item.name}, ${item.price}
+        </div>
+        <div>
+          <span>Qty:</span>
+          <input
+            type="number"
+            placeholder="1"
+            value={item.purchaseQuantity}
+            // onChange={onChange}
+          />
+          <span
+            role="img"
+            aria-label="trash"
+            // onClick={() => removeFromCart(item)}
+          >
+            🗑️
+          </span>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default CartItem;
