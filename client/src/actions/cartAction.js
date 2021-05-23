@@ -72,10 +72,45 @@ const onChangeUpdateCartQuantity = (value, item) => (dispatch) => {
   }
 };
 
+const addItemToCart = (cart, id,currentProduct) => (dispatch) => {
+  const ItemInCart = cart.find((cartItem) => cartItem._id === id);
+  if (ItemInCart) {
+    dispatch({
+      type: UPDATE_CART_QUANTITY,
+      _id: id,
+      purchaseQuantity: parseInt(ItemInCart.purchaseQuantity) + 1,
+    });
+    idbPromise("cart", "put", {
+      ...ItemInCart,
+      purchaseQuantity: parseInt(ItemInCart.purchaseQuantity) + 1,
+    });
+  } else {
+    dispatch({
+      type: ADD_TO_CART,
+      product: { ...currentProduct, purchaseQuantity: 1 },
+      cartOpen: true,
+    });
+    idbPromise("cart", "put", {
+      ...currentProduct,
+      purchaseQuantity: 1,
+    });
+  }
+};
+const removeItemFromCart = (currentProduct) => (dispatch) => {
+  dispatch({
+    type: REMOVE_FROM_CART,
+    _id: currentProduct._id,
+  });
+  idbPromise("cart", "delete", {
+    ...currentProduct,
+  });
+};
 export {
   toggleCart,
   addMultipleToCart,
   updateCartQuantity,
   removeFromCart,
   onChangeUpdateCartQuantity,
+  addItemToCart,
+  removeItemFromCart,
 };

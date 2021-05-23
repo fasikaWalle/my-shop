@@ -1,36 +1,12 @@
 import React from "react";
-// import { useStoreContext } from "../../utils/GlobalState";
-// import { REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";
-// import { idbPromise } from "../../utils/helpers";
-// import propTypes from "prop-types";
-// import * as cartAction from "../../actions/cartAction";
+
 const CartItem = ({ item, removeFromCart, onChangeUpdateCartQuantity }) => {
-  // const [, dispatch] = useStoreContext();
   const removeItemFromCart = (item) => {
-    // dispatch({
-    //   type: REMOVE_FROM_CART,
-    //   _id: item._id,
-    // });
-    // idbPromise("cart", "delete", { ...item });
     removeFromCart(item);
   };
   const onChange = (event) => {
     let value = event.target.value;
     onChangeUpdateCartQuantity(value, item);
-    //   if (value === "0") {
-    //     dispatch({
-    //       type: REMOVE_FROM_CART,
-    //       _id: item._id,
-    //     });
-    //     idbPromise("cart", "delete", { ...item });
-    //   } else {
-    //     dispatch({
-    //       type: UPDATE_CART_QUANTITY,
-    //       _id: item._id,
-    //       purchaseQuantity: parseInt(value),
-    //     });
-    //     idbPromise("cart", "put", { ...item, purchaseQuantity: parseInt(value) });
-    //   }
   };
   return (
     <div className="flex-row">
