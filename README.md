@@ -11,6 +11,7 @@ This assignment is focused on refactor the shop-shop e-commerce platform that th
 `npm install`
 
 ## Usage
+- Deployed site: 
 
 ![project image](../Assets/images/shop.png)
 
