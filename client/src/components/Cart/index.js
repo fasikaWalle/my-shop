@@ -22,7 +22,7 @@ const Cart = ({
 }) => {
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
   useEffect(() => {
-    addMultipleToCart(cart);
+    addMultipleToCart();
   }, [cart.length, addMultipleToCart]);
 
   useEffect(() => {
@@ -33,9 +33,6 @@ const Cart = ({
     }
   }, [data]);
 
-  const toggleCartContainer = () => {
-    toggleCart();
-  };
   const calculateTotal = () => {
     let total = 0;
     cart.forEach((item) => {
@@ -45,7 +42,7 @@ const Cart = ({
   };
   if (!cartOpen) {
     return (
-      <div className="cart-closed" onClick={toggleCartContainer}>
+      <div className="cart-closed" onClick={() => toggleCart()}>
         <span role="img" aria-label="trash">
           🛒
         </span>

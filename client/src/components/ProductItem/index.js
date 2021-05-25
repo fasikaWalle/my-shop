@@ -5,9 +5,6 @@ import { pluralize } from "../../utils/helpers";
 function ProductItem(item) {
   const { image, name, _id, price, quantity, updateCartQuantity, cart } = item;
 
-  const addToCart = () => {
-    updateCartQuantity(cart, _id, item);
-  };
   return (
     <div className="card px-1 py-1">
       <Link to={`/products/${_id}`}>
@@ -20,7 +17,9 @@ function ProductItem(item) {
         </div>
         <span>${price}</span>
       </div>
-      <button onClick={addToCart}>Add to cart</button>
+      <button onClick={() => updateCartQuantity(cart, _id, item)}>
+        Add to cart
+      </button>
     </div>
   );
 }

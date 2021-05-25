@@ -15,10 +15,11 @@ const toggleCart = () => (dispatch) => {
   });
 };
 
-const addMultipleToCart = (cart) => async (dispatch) => {
+const addMultipleToCart = () => async (dispatch) => {
+  const cart = await idbPromise("cart", "get");
+  dispatch({ type: ADD_MULTIPLE_TO_CART, products: [...cart] });
   if (!cart.length) {
-    const cart = await idbPromise("cart", "get");
-    dispatch({ type: ADD_MULTIPLE_TO_CART, products: [...cart] });
+    addMultipleToCart();
   }
 };
 
@@ -72,7 +73,7 @@ const onChangeUpdateCartQuantity = (value, item) => (dispatch) => {
   }
 };
 
-const addItemToCart = (cart, id,currentProduct) => (dispatch) => {
+const addItemToCart = (cart, id, currentProduct) => (dispatch) => {
   const ItemInCart = cart.find((cartItem) => cartItem._id === id);
   if (ItemInCart) {
     dispatch({

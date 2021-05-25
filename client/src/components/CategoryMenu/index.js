@@ -14,17 +14,13 @@ function CategoryMenu({ fetchCategories, categories, setCurrentCategory }) {
     fetchCategories(categoryData, loading);
   }, [categoryData, fetchCategories, loading]);
 
-  const clickHandler = (id) => {
-    setCurrentCategory(id);
-  };
-
   return (
     <div>
       {categoryData ? (
         <div>
           <h2>Choose a Category:</h2>
           {categories.map((item) => (
-            <button key={item._id} onClick={() => clickHandler(item._id)}>
+            <button key={item._id} onClick={() => setCurrentCategory(item._id)}>
               {item.name}
             </button>
           ))}

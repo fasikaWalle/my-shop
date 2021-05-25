@@ -5,7 +5,7 @@ import ProductItem from "../ProductItem";
 import { QUERY_PRODUCTS } from "../../utils/queries";
 import spinner from "../../assets/spinner.gif";
 import * as cartAction from "../../actions/cartAction";
-// import fetchProduct from "../../actions/productAction";
+
 import * as productAction from "../../actions/productAction";
 import propTypes from "prop-types";
 import { connect } from "react-redux";

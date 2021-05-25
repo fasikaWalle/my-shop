@@ -1,5 +1,7 @@
 import React from "react";
-
+import { connect } from "react-redux";
+import propTypes from "prop-types";
+import * as cartAction from "../../actions/cartAction";
 const CartItem = ({ item, removeFromCart, onChangeUpdateCartQuantity }) => {
   const removeItemFromCart = (item) => {
     removeFromCart(item);
@@ -36,6 +38,11 @@ const CartItem = ({ item, removeFromCart, onChangeUpdateCartQuantity }) => {
       </div>
     </div>
   );
+};
+propTypes.CartItem = {
+  removeFromCart: propTypes.func.isRequired,
+  onChangeUpdateCartQuantity: propTypes.func.isRequired,
+  item: propTypes.object.isRequired,
 };
 
 export default CartItem;
