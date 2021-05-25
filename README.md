@@ -11,9 +11,10 @@ This assignment is focused on refactor the shop-shop e-commerce platform that th
 `npm install`
 
 ## Usage
-- Deployed site: 
+- Deployed site: https://fasikawalle-my-shop.herokuapp.com/
 
-![project image](../Assets/images/shop.png)
+![shop](https://user-images.githubusercontent.com/73629983/119442883-3e655a00-bcee-11eb-8898-59a0171d2cad.png)
+
 
 ## Licence
 
